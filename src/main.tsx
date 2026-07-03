@@ -6,11 +6,12 @@ import Home from "./component/Home/Home.tsx";
 import Product_List from "./component/Products/Product_List.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./component/Login/Login.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />, 
+    element: <App />,
     errorElement: (
       <div className="flex h-screen items-center justify-center text-xl font-bold">
         404 - Page Not Found
@@ -36,20 +37,24 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:'login',
-        element:<Login/>,
-        errorElement:(
+        path: "login",
+        element: <Login />,
+        errorElement: (
           <div className="flex h-screen items-center justify-center text-xl font-bold">
             404 - Page Not Found
           </div>
-        )
-      }
+        ),
+      },
     ],
   },
 ]);
 
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>,
 );
