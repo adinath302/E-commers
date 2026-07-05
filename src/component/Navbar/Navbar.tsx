@@ -32,7 +32,7 @@ const Navbar = () => {
             <li key={link.label} className="animated-underline cursor-pointer">
               <Link to={link.href} className="block w-full py-1">
                 {link.label}
-              </Link>
+              </Link> 
             </li>
           ))}
         </ul>
