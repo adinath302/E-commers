@@ -15,7 +15,12 @@ const Product_List = () => {
 
   console.log("new data", data);
 
-  if (isFetching) return <img src={loading} alt="Loading..." />;
+  if (isFetching)
+    return (
+      <div className="flex justify-center items-center h-screen ">
+        <img className="w-150 flex" src={loading} alt="Loading..." />;
+      </div>
+    );
   if (error) return "An error has occurred: " + error.message;
 
   return (
