@@ -1,16 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import Product from "./Product";
 
+const loading = "/loading.svg";
+
 const Product_List = () => {
-  const { data, isPending, error } = useQuery({
+  const { data, isFetching, error } = useQuery({
     queryKey: ["products"],
     queryFn: () =>
-      fetch("https://dummyjson.com/products").then((res) => res.json()),
+      fetch("https://dummyjson.com/products").then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      }),
   });
 
   console.log("new data", data);
 
-  if (isPending) return "loading....";
+  if (isFetching) return <img src={loading} alt="Loading..." />;
   if (error) return "An error has occurred: " + error.message;
 
   return (
