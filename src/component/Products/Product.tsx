@@ -9,7 +9,12 @@ const Product = ({ title, price, description, image }: Props) => {
   return (
     <div className="flex flex-col bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden h-full w-full">
       <div className="h-48 w-full bg-gray-100 overflow-hidden ">
-        <img src={image} loading="lazy" alt="" className="w-full h-full object-cover" />
+        <img
+          src={image}
+          loading="lazy"
+          alt=""
+          className="w-full h-full object-cover"
+        />
       </div>
       <div className="flex flex-col grow p-4 justify-between gap-4">
         {/* title */}
