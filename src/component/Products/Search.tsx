@@ -1,20 +1,18 @@
-import React from "react";
 
-interface searchprop {
-  searchText: string;
-  setSearchText: React.Dispatch<React.SetStateAction<string>>;
-}
+type searchprop = {
+  value: string;
+  onSearchChange : (value: string) => void;
+};
 
-
-const Search = ({ searchText, setSearchText }: searchprop) => {
+const Search = ({ value, onSearchChange  }: searchprop) => {
   return (
     <div className="border-xl">
       <input
         type="text"
-        value={searchText}
+        value={value}
         placeholder="Search product"
         className="border rounded-xl p-1 text-sm"
-        onChange={(e: any) => setSearchText(e.target.value)}
+        onChange={(e) => onSearchChange(e.target.value)}
       />
     </div>
   );
