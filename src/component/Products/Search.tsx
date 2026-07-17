@@ -11,7 +11,7 @@ const Search = ({ value, onSearchChange  }: searchprop) => {
         type="text"
         value={value}
         placeholder="Search product"
-        className="border rounded-xl p-1 text-sm"
+        className="rounded-xl border- shadow shadow-gray-1 p-2.5 text-sm"
         onChange={(e) => onSearchChange(e.target.value)}
       />
     </div>

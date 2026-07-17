@@ -3,8 +3,8 @@ import type { Product } from "../types/product";
 import type { Filters } from "../types/Filters";
 
 const useFilteredProducts = (
-  products: Product[],
-  filters: Filters,
+  products: Product[], // api data
+  filters: Filters, // the state for Search 
 ): Product[] => {
   return useMemo(() => {
     let result = [...products];
@@ -14,6 +14,9 @@ const useFilteredProducts = (
         product.title.toLowerCase().includes(filters.search.toLowerCase()),
       );
     }
+
+    
+
     return result;
   }, [products, filters.search]);
 };

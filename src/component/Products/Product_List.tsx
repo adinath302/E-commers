@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useProducts } from "../../hooks/useProducts";
 import useFilteredProducts from "../../hooks/useFilteredProducts";
 import type { Filters } from "../../types/Filters";
+import Categories from "./Categories";
 const loading = "/loading.svg";
 
 const Product_List = () => {
@@ -37,9 +38,9 @@ const Product_List = () => {
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <div className="max-w-7xl mx-auto p-4">
-      {/* features */}
-      <div className="p-2 flex justify-end">
+    <div className="max-w-7xl mx-auto p-4 ">
+      {/* features UI*/}
+      <div className="p-1 flex justify-end gap-x-2 mb-4">
         <Search
           value={filters.search}
           onSearchChange={(value: any) =>
@@ -49,6 +50,7 @@ const Product_List = () => {
             }))
           }
         />
+        <Categories />
       </div>
       {/* fetch products */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
