@@ -3,17 +3,26 @@ import Search from "./Search";
 import { useState } from "react";
 import { useProducts } from "../../hooks/useProducts";
 import useFilteredProducts from "../../hooks/useFilteredProducts";
+import type { Filters } from "../../types/Filters";
 const loading = "/loading.svg";
 
 const Product_List = () => {
-  const { data: products, isFetching, error } = useProducts();
-  const [filters, setFilters] = useState({ search: "" }); // the initial state is object
+  const { data, isFetching, error } = useProducts();
+  const [filters, setFilters] = useState<Filters>({
+    search: "",
+    category: "",
+    minPrice: 0,
+    maxPrice: 10000,
+    sortBy: "",
+    page: 1,
+    limit: 12,
+  }); // the initial state is object
 
   const filteredProducts = useFilteredProducts(
     // function implementation
     data?.products ?? [],
     filters,
-  ) 
+  );
 
   // loading
   if (isFetching) {

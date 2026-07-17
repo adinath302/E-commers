@@ -1,23 +1,11 @@
 import { useMemo } from "react";
-export interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  rating: number;
-  category: string;
-  stock: number;
-  thumbnail: string;
-  images: string[];
-}
-export interface Filters {
-  search: string;
-}
+import type { Product } from "../types/product";
+import type { Filters } from "../types/Filters";
 
 const useFilteredProducts = (
   products: Product[],
   filters: Filters,
-): Product[] => { 
+): Product[] => {
   return useMemo(() => {
     let result = [...products];
 
