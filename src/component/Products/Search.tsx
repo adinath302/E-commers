@@ -6,7 +6,7 @@ type searchprop = {
 
 const Search = ({ value, onSearchChange }: searchprop) => {
   return (
-    <div className="border-xl flex items-center rounded-xl shadow shadow-gray-1 p-1 sm:p-2.5">
+    <div className="border-xl items-center rounded-xl shadow flex justify-between shadow-gray-1 p-2.5">
       <input
         type="text"
         value={value}

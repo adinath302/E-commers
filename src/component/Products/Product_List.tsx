@@ -6,7 +6,6 @@ import useFilteredProducts from "../../hooks/useFilteredProducts";
 import type { Filters } from "../../types/Filters";
 import Categories from "./Categories";
 const loading = "/loading.svg";
-
 const Product_List = () => {
   const { data, isFetching, error } = useProducts();
   const [filters, setFilters] = useState<Filters>({
@@ -36,12 +35,11 @@ const Product_List = () => {
 
   // error handling
   if (error) return "An error has occurred: " + error.message;
-
+  console.log("data from api", data?.products);
   return (
     <div className="max-w-7xl mx-auto p-4 ">
       {/* features UI*/}
-      <div className="p-1 flex justify-end gap-x-2 mb-4">
-        {/* search component */}
+      <div className="mb-2 sm:hidden">
         <Search
           value={filters.search}
           onSearchChange={(value: any) =>
@@ -51,6 +49,20 @@ const Product_List = () => {
             }))
           }
         />
+      </div>
+      <div className="p-1 flex justify-end gap-x-2 mb-4">
+        {/* search component */}
+        <div className="hidden sm:flex">
+          <Search
+            value={filters.search}
+            onSearchChange={(value: any) =>
+              setFilters((prev) => ({
+                ...prev,
+                search: value,
+              }))
+            }
+          />
+        </div>
         {/* categories component */}
         <Categories
           onCategoriChange={(value: any) =>
@@ -59,7 +71,8 @@ const Product_List = () => {
               category: value,
             }))
           }
-          value={filters.category}
+          data={data?.products ?? []} // api data
+          value={filters.category} // value from the state
         />
       </div>
       {/* fetch products */}
@@ -72,6 +85,7 @@ const Product_List = () => {
                 title={item.title}
                 price={item.price}
                 image={item.images[0]}
+                cate={item.category}
               />
             </div>
           );

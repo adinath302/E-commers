@@ -1,22 +1,28 @@
+import type { Product } from "../../types/product";
+
 type Categorie = {
   value: string;
   onCategoriChange: (value: string) => void;
+  data: Product[];
 };
 
-const Categories = ({ onCategoriChange, value }: Categorie) => {
+const Categories = ({ onCategoriChange, value, data }: Categorie) => {
+  console.log("data from api", data);
+  const categories = [...new Set(data.map((item) => item.category))];
   return (
     <div className="rounded-xl shadow-sm items-center text-sm flex text-gray-600 p-1 sm:p-2.5 ">
       <select
-        onchange={(e) => onCategoriChange(e.target.value)}
+        onChange={(e) => onCategoriChange(e.target.value)}
+        value={value}
         name=""
         id=""
         className="focus:outline-none"
       >
-        <option disabled selected>Categories</option>
-        <option value="Beauty">Beauty</option>
-        <option value="Fragrances">Fragrances</option>
-        <option value="Furniture">Furniture</option>
-        <option value="Groceries">Groceries</option>
+        {categories.map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
       </select>
     </div>
   );
