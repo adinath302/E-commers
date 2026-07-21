@@ -24,7 +24,7 @@ const Product_List = () => {
     filters,
   );
 
-  // loading
+  // Loading
   if (isFetching) {
     return (
       <div className="flex justify-center items-center h-screen">
