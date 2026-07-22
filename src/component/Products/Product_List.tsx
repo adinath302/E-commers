@@ -7,6 +7,7 @@ import type { Filters } from "../../types/Filters";
 import Categories from "./Categories";
 const loading = "/loading.svg";
 const Product_List = () => {
+  
   const { data, isFetching, error } = useProducts();
   const [filters, setFilters] = useState<Filters>({
     search: "",
@@ -33,7 +34,7 @@ const Product_List = () => {
     );
   }
 
-  // error handling
+  // Error handling
   if (error) return "An error has occurred: " + error.message;
   console.log("data from api", data?.products);
   return (
