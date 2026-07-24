@@ -43,7 +43,8 @@ const Navbar = () => {
 
       <div>
         <ul className="flex gap-6 items-center flex-1">
-          <li className="cursor-pointer">
+          <li className="cursor-pointer relative flex  text-[11px]">
+            <span className="absolute right-[-8px] top-[-8px] w-[18px] h-[18px]  bg-red-600 rounded-full flex justify-center items-center text-white text-[11px]]">0</span>
             <IoCartOutline className="text-[19px]" />
           </li>
           <li className="cursor-pointer">

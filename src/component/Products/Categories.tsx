@@ -7,7 +7,6 @@ type Categorie = {
 };
 
 const Categories = ({ onCategoriChange, value, data }: Categorie) => {
-  console.log("data from api", data);
   const categories = [...new Set(data.map((item) => item.category))];
   return (
     <div className="rounded-xl shadow-sm items-center text-sm flex text-gray-600 p-1 sm:p-2.5 ">

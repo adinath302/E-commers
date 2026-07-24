@@ -7,7 +7,6 @@ import type { Filters } from "../../types/Filters";
 import Categories from "./Categories";
 const loading = "/loading.svg";
 const Product_List = () => {
-  
   const { data, isFetching, error } = useProducts();
   const [filters, setFilters] = useState<Filters>({
     search: "",
@@ -36,7 +35,6 @@ const Product_List = () => {
 
   // Error handling
   if (error) return "An error has occurred: " + error.message;
-  console.log("data from api", data?.products);
   return (
     <div className="max-w-7xl mx-auto p-4 ">
       {/* features UI*/}
@@ -79,6 +77,7 @@ const Product_List = () => {
       {/* fetch products */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredProducts?.map((item: any) => {
+
           return (
             <div key={item.id} className="">
               <Product
@@ -87,6 +86,8 @@ const Product_List = () => {
                 price={item.price}
                 image={item.images[0]}
                 cate={item.category}
+                id={item.id}
+                item={item}
               />
             </div>
           );
