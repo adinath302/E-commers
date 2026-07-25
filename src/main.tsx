@@ -7,6 +7,7 @@ import Product_List from "./component/Products/Product_List.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./component/Login/Login.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Cart from "./component/cart/Cart.tsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,15 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+        errorElement: (
+          <div className="flex h-screen items-center justify-center text-xl font-bold">
+            404 - Page Not Found
+          </div>
+        ),
+      },
+      {
+        path: "Cart",
+        element: <Cart />,
         errorElement: (
           <div className="flex h-screen items-center justify-center text-xl font-bold">
             404 - Page Not Found

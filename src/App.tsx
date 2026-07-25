@@ -6,7 +6,6 @@ const App = () => {
   return (
     <div>
       <Navbar />
-
       <main>
         {/* Outlet is used to render the child routes */}
         <Outlet /> 

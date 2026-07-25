@@ -4,6 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { IoCartOutline } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import useCartStore from "../../store/useCartStore";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -13,7 +14,8 @@ const NAV_LINKS = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const quantity = useCartStore((state) => state.cart.length);
+  console.log("quantity", quantity);
   return (
     <div className="py-3 relative bg-gray-200 items-center justify-between px-4 gap-10 flex">
       {/* Menu Icon: Only visible on mobile screens */}
@@ -32,7 +34,7 @@ const Navbar = () => {
             <li key={link.label} className="animated-underline cursor-pointer">
               <Link to={link.href} className="block w-full py-1">
                 {link.label}
-              </Link> 
+              </Link>
             </li>
           ))}
         </ul>
@@ -44,8 +46,12 @@ const Navbar = () => {
       <div>
         <ul className="flex gap-6 items-center flex-1">
           <li className="cursor-pointer relative flex  text-[11px]">
-            <span className="absolute right-[-8px] top-[-8px] w-[18px] h-[18px]  bg-red-600 rounded-full flex justify-center items-center text-white text-[11px]]">0</span>
-            <IoCartOutline className="text-[19px]" />
+            <Link to="/Cart" className="relative flex items-center">
+              <span className="absolute right-[-8px] top-[-8px] w-[18px] h-[18px]  bg-red-600 rounded-full flex justify-center items-center text-white text-[11px]]">
+                {quantity}
+              </span>
+              <IoCartOutline className="text-[19px]" />
+            </Link>
           </li>
           <li className="cursor-pointer">
             <CgProfile />
@@ -69,6 +75,7 @@ const MobailSidebar = ({ isOpen, onClose }: Mobailview) => {
         isOpen ? "translate-x-[400px]" : "translate-x-0"
       }`}
     >
+      {/* close button on mobail view */}
       <div className="absolute top-0 right-0 p-3">
         <RxCross2 onClick={onClose} className="cursor-pointer" />
       </div>
@@ -78,8 +85,15 @@ const MobailSidebar = ({ isOpen, onClose }: Mobailview) => {
           E-commers
         </div>
         {NAV_LINKS.map((link) => (
-          <li key={link.label} className="animated-underline cursor-pointer ml-4">
-            <Link to={link.href} onClick={onClose} className="block w-full py-1">
+          <li
+            key={link.label}
+            className="animated-underline cursor-pointer ml-4"
+          >
+            <Link
+              to={link.href}
+              onClick={onClose}
+              className="block w-full py-1"
+            >
               {link.label}
             </Link>
           </li>
