@@ -15,16 +15,18 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const quantity = useCartStore((state) => state.cart.length);
-  console.log("quantity", quantity);
+
+  // console.log("quantity", quantity);
+  
   return (
-    <div className="py-3 relative bg-gray-200 items-center justify-between px-4 gap-10 flex">
+    <div className="py-3 sticky top-0 relative z-50 bg-gray-200 items-center justify-between px-4 gap-10 flex">
       {/* Menu Icon: Only visible on mobile screens */}
       <div className="sm:hidden cursor-pointer">
         <AiOutlineBars onClick={() => setIsOpen(true)} aria-label="Open Menu" />
       </div>
 
       <div className="flex-none ml-20 sm:ml-0 font-bold text-purple-500">
-        E-commers
+        <Link to="/">E-commers</Link>
       </div>
 
       {/* Desktop Links: Hidden on mobile, visible on sm and up */}

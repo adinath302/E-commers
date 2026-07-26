@@ -44,7 +44,7 @@ const Product = ({ title, price, description, image, cate, item }: Props) => {
           </div>
           <div
             onClick={() => HandleAddtocart(item)}
-            className="px-4 py-2 bg-black text-sm text-white font-medium cursor-pointer hover:bg-purple-600 hover:scale-[1.03] active:scale-95 shadow-sm duration-200 transition-all  rounded-lg"
+            className="select-none px-4 py-2 bg-black text-sm text-white font-medium cursor-pointer hover:bg-purple-600 hover:scale-[1.03] active:scale-95 shadow-sm duration-200 transition-all  rounded-lg"
           >
             Add to Cart
           </div>
