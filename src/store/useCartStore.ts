@@ -10,8 +10,9 @@ interface CartState {
   addToCart: (product: Product) => void;
   increaseQuantity: (id: number) => void;
   decreaseQuantity: (id: number) => void;
+  RemoveProduct: (id: number) => void;
 }
-
+ 
 const useCartStore = create<CartState>((set) => ({
   cart: [],
 
@@ -20,7 +21,7 @@ const useCartStore = create<CartState>((set) => ({
     set((state) => {
       const existingItem = state.cart.find((item) => item.id === product.id);
       // console.log("globle-store",product);
-      console.log(state);
+      // console.log(state);
       if (existingItem) {
         // if the item is already in the cart, increase the quantity
         return {
@@ -77,7 +78,6 @@ const useCartStore = create<CartState>((set) => ({
       return {
         cart: state.cart.filter((item) => item.id !== id),
       };
-      return state;
     }),
 }));
 

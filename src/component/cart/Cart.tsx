@@ -6,6 +6,16 @@ const Cart = () => {
   const Increaseqty = useCartStore((state) => state.increaseQuantity);
   const Decreaseqty = useCartStore((state) => state.decreaseQuantity);
   const RemoveProduct = useCartStore((state) => state.RemoveProduct);
+
+  const subTotal = (Cart: any) => {
+    let total = 0;
+    Cart.forEach((item: any) => (total += item.price * item.quantity));
+    return Math.round(total * 100) / 100; // round to 2 decimal places and return total;
+  };
+
+  const shippingCost = 2.35;
+
+  const totalCost = subTotal(Cart) + shippingCost;
   return (
     <>
       {/* logo */}
@@ -82,13 +92,27 @@ const Cart = () => {
 
         {/* Total/Summary */}
         {Cart && Cart.length > 0 && (
-          <section className="sticky top-0">
+          <section className="sticky top-20 sm:mx-50 mx-5 self-start">
             {/* logo  */}
-            <h1 className="font-semibold text-black flex items-center justify-center  text-md sm:text-xl line-clamp-1">
+            <h1 className="font-semibold text-black flex items-center text-lg sm:text-xl line-clamp-1">
               Summary
             </h1>
 
             {/* total */}
+            <div className="font-normal flex flex-col gap-3 mt-10">
+              <div className="flex">
+                Subtotal <span className="ml-auto">$ {subTotal(Cart)}</span>
+              </div>
+              <div className="flex">
+                Shipping <span className="ml-auto">$ {shippingCost}</span>
+              </div>
+            </div>
+            <div className="mt-10 font-semibold flex">
+              Total{" "}
+              <span className="ml-auto">
+                {Math.round(totalCost * 100) / 100}
+              </span>
+            </div>
           </section>
         )}
       </div>
