@@ -82,19 +82,19 @@ const MobailSidebar = ({ isOpen, onClose }: Mobailview) => {
         <RxCross2 onClick={onClose} className="cursor-pointer" />
       </div>
 
-      <ul className="flex flex-col gap-8 mt-4">
+      <ul className="flex flex-col gap-8 mt-4 w-64">
         <div className="flex-none mx-auto font-bold text-purple-500">
           E-commers
         </div>
         {NAV_LINKS.map((link) => (
           <li
             key={link.label}
-            className="animated-underline cursor-pointer ml-4"
+            className="animated-underline block w-full cursor-pointer pl-4 hover:bg-gray-400 select-none"
           >
             <Link
               to={link.href}
               onClick={onClose}
-              className="block w-full py-1"
+              className="w-full py-1 block"
             >
               {link.label}
             </Link>

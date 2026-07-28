@@ -92,7 +92,7 @@ const Cart = () => {
 
         {/* Total/Summary */}
         {Cart && Cart.length > 0 && (
-          <section className="sticky top-20 sm:mx-50 mx-5 self-start">
+          <section className="sticky top-20 sm:mx-50 mx-5 self-start mt-9">
             {/* logo  */}
             <h1 className="font-semibold text-black flex items-center text-lg sm:text-xl line-clamp-1">
               Summary
@@ -113,6 +113,8 @@ const Cart = () => {
                 {Math.round(totalCost * 100) / 100}
               </span>
             </div>
+             {/* Checkout button */}
+             <button className="mt-7 sm:mt-5 sm:mb-9 mb-15 w-full text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Checkout</button>
           </section>
         )}
       </div>
