@@ -5,7 +5,7 @@ const Cart = () => {
   const Cart = useCartStore((state) => state.cart);
   const Increaseqty = useCartStore((state) => state.increaseQuantity);
   const Decreaseqty = useCartStore((state) => state.decreaseQuantity);
-  const RemoveProduct = useCartStore((state) => state.RemoveProduct);
+  const removeProduct = useCartStore((state) => state.removeProduct);
 
   const subTotal = (Cart: any) => {
     let total = 0;
@@ -27,7 +27,7 @@ const Cart = () => {
         )}
       </section>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 sm:mx-30 mx-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 sm:mx-30 mx-5">
         <div>
           {/* Cart ui */}
           {Cart &&
@@ -78,7 +78,7 @@ const Cart = () => {
                       <div className="flex items-end justify-end">
                         {/*  remove button */}
                         <AiOutlineDelete
-                          onClick={() => RemoveProduct(item.id)}
+                          onClick={() => removeProduct(item.id)}
                           className="cursor-pointer select-none text-gray-500"
                         />
                       </div>
@@ -89,32 +89,44 @@ const Cart = () => {
               );
             })}
         </div>
-
+ 
         {/* Total/Summary */}
         {Cart && Cart.length > 0 && (
-          <section className="sticky top-20 sm:mx-50 mx-5 self-start mt-9">
-            {/* logo  */}
-            <h1 className="font-semibold text-black flex items-center text-lg sm:text-xl line-clamp-1">
+          <section className="sticky top-24 self-start mx-auto mt-6 lg:mt-9 w-full max-w-full lg:max-w-md bg-white border border-gray-100 rounded-2xl p-5 sm:p-6 shadow-sm">
+            {/* Component Title */}
+            <h2 className="font-bold text-gray-900 flex items-center text-lg sm:text-xl tracking-tight">
               Summary
-            </h1>
+            </h2>
 
-            {/* total */}
-            <div className="font-normal flex flex-col gap-3 mt-10">
-              <div className="flex">
-                Subtotal <span className="ml-auto">$ {subTotal(Cart)}</span>
+            {/* Fee Lines Container */}
+            <div className="text-sm sm:text-base font-normal flex flex-col gap-3 mt-6 sm:mt-8 text-gray-600">
+              <div className="flex justify-between items-center">
+                <span>Subtotal</span>
+                <span className="font-semibold text-gray-900">
+                  $ {subTotal(Cart)}
+                </span>
               </div>
-              <div className="flex">
-                Shipping <span className="ml-auto">$ {shippingCost}</span>
+              <div className="flex justify-between items-center">
+                <span>Shipping</span>
+                <span className="font-semibold text-gray-900">
+                  $ {shippingCost}
+                </span>
               </div>
             </div>
-            <div className="mt-10 font-semibold flex">
-              Total{" "}
-              <span className="ml-auto">
-                {Math.round(totalCost * 100) / 100}
-              </span>
+
+            {/* Divider Line */}
+            <hr className="my-5 border-gray-200" />
+
+            {/* Total Cost Section */}
+            <div className="text-base sm:text-lg font-bold flex justify-between items-center text-gray-900">
+              <span>Total</span>
+              <span>$ {Math.round(totalCost * 100) / 100}</span>
             </div>
-             {/* Checkout button */}
-             <button className="mt-7 sm:mt-5 sm:mb-9 mb-15 w-full text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Checkout</button>
+
+            {/* Checkout Button */}
+            <button className="mt-6 w-full text-white bg-gray-900 hover:bg-black focus:ring-4 focus:outline-none focus:ring-gray-300 font-semibold rounded-xl text-sm sm:text-base px-5 py-3 transition-colors duration-200 text-center">
+              Proceed to Checkout
+            </button>
           </section>
         )}
       </div>
