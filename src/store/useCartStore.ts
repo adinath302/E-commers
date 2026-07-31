@@ -1,11 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware"; // 1. ADDED: Required import for persist
 import type { Product } from "../types/product";
+import type { CartItem } from "../types/cart";
 // 2. REMOVED: useLocalStorage import as it is no longer needed
-
-export interface CartItem extends Product {
-  quantity: number;
-}
 
 interface CartState {
   cart: CartItem[];
