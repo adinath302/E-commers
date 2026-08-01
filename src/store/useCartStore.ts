@@ -44,7 +44,7 @@ const useCartStore = create<CartState>()(
         set((state) => {
           return {
             cart: state.cart.map((item) => {
-              if (item.id === id) {
+              if (item.id === id && item.quantity < 100) {
                 return {
                   ...item,
                   quantity: item.quantity + 1,
@@ -60,7 +60,7 @@ const useCartStore = create<CartState>()(
         set((state) => {
           return {
             cart: state.cart.map((item) => {
-              if (item.id === id) {
+              if (item.id === id && item.quantity > 1) {
                 return {
                   ...item,
                   quantity: item.quantity - 1,

@@ -14,7 +14,7 @@ const Product = ({ title, price, description, image, cate, item }: Props) => {
   const HandleAddtocart = useCartStore((state) => state.addToCart);
   return (
     <div className="flex flex-col bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden h-full w-full">
-      <div className="h-48 w-full bg-gray-100 overflow-hidden ">
+      <div className="h-48 w-full bg-gray-100 overflow-hidden">
         <img
           src={image}
           loading="lazy"
@@ -22,7 +22,7 @@ const Product = ({ title, price, description, image, cate, item }: Props) => {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="flex flex-col grow p-4 justify-between gap-4">
+      <div className="flex flex-col grow p-2 justify-between gap-1">
         <div className="flex justify-between items-center">
           {/* title */}
           <h1 className="font-semibold text-black text-lg line-clamp-1">

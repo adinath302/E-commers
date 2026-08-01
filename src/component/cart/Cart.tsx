@@ -38,7 +38,7 @@ const Cart = () => {
                   className="relative flex bg-white overflow-hidden gap-3 p-4 inset-x-0 bottom-0"
                 >
                   {/* image */}
-                  <div className="sm:h-24 sm:w-24 h-18 w-18 bg-gray-100 overflow-hidden ">
+                  <div className="sm:h-24 sm:w-24  h-18 w-18 bg-gray-100 overflow-hidden ">
                     <img
                       src={item.images[0]}
                       loading="lazy"
@@ -89,7 +89,7 @@ const Cart = () => {
               );
             })}
         </div>
- 
+
         {/* Total/Summary */}
         {Cart && Cart.length > 0 && (
           <section className="sticky top-24 self-start mx-auto mt-6 lg:mt-9 w-full max-w-full lg:max-w-md bg-white border border-gray-100 rounded-2xl p-5 sm:p-6 shadow-sm">
