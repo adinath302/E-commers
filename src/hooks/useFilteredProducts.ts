@@ -22,6 +22,9 @@ const useFilteredProducts = (
       );
     }
 
+    
+    
+
     return result;
   }, [products, filters.search, filters.category]);
 };

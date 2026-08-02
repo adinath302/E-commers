@@ -1,21 +1,25 @@
 import { AiOutlineDelete } from "react-icons/ai";
 import useCartStore from "../../store/useCartStore";
-
+import {
+  calculateSubTotal,
+  calculateTotalCost,
+  SHIPPING_COST,
+} from "../utils/cart.ts";
+import type { CartItem } from "../../types/cart.ts";
 const Cart = () => {
   const Cart = useCartStore((state) => state.cart);
   const Increaseqty = useCartStore((state) => state.increaseQuantity);
   const Decreaseqty = useCartStore((state) => state.decreaseQuantity);
   const removeProduct = useCartStore((state) => state.removeProduct);
 
-  const subTotal = (Cart: any) => {
-    let total = 0;
-    Cart.forEach((item: any) => (total += item.price * item.quantity));
-    return Math.round(total * 100) / 100; // round to 2 decimal places and return total;
-  };
+  const subTotal = calculateSubTotal(Cart);
+  const totalCost = calculateTotalCost(Cart);
+  const shippingCost = SHIPPING_COST;
 
-  const shippingCost = 2.35;
+  function calculateShippingCost(Cart: CartItem[]): import("react").ReactNode {
+    throw new Error("Function not implemented.");
+  }
 
-  const totalCost = subTotal(Cart) + shippingCost;
   return (
     <>
       {/* logo */}
@@ -103,13 +107,13 @@ const Cart = () => {
               <div className="flex justify-between items-center">
                 <span>Subtotal</span>
                 <span className="font-semibold text-gray-900">
-                  $ {subTotal(Cart)}
+                  $ {subTotal.toFixed(2)}
                 </span>
               </div>
               <div className="flex justify-between items-center">
                 <span>Shipping</span>
                 <span className="font-semibold text-gray-900">
-                  $ {shippingCost}
+                  $ {shippingCost.toFixed(2)}
                 </span>
               </div>
             </div>
@@ -120,7 +124,7 @@ const Cart = () => {
             {/* Total Cost Section */}
             <div className="text-base sm:text-lg font-bold flex justify-between items-center text-gray-900">
               <span>Total</span>
-              <span>$ {Math.round(totalCost * 100) / 100}</span>
+              <span>$ {totalCost.toFixed(2)}</span>
             </div>
 
             {/* Checkout Button */}

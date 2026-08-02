@@ -5,6 +5,7 @@ import { useProducts } from "../../hooks/useProducts";
 import useFilteredProducts from "../../hooks/useFilteredProducts";
 import type { Filters } from "../../types/Filters";
 import Categories from "./Categories";
+import Pagination from "../Pagination/Pagination";
 const loading = "/loading.svg";
 const Product_List = () => {
   const { data, isFetching, error } = useProducts();
@@ -49,7 +50,7 @@ const Product_List = () => {
           }
         />
       </div>
-      <div className="p-1 flex justify-end gap-x-2 mb-4">
+      <div className="p-1 flex justify-end gap-x-2 mb-3">
         {/* search component */}
         <div className="hidden sm:flex">
           <Search
@@ -77,7 +78,6 @@ const Product_List = () => {
       {/* fetch products */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {filteredProducts?.map((item: any) => {
-
           return (
             <div key={item.id} className="">
               <Product
@@ -93,8 +93,12 @@ const Product_List = () => {
           );
         })}
       </div>
+      {/* pagination */}
+    <div>
+      <Pagination/>
+    </div>
     </div>
   );
 };
-
+  
 export default Product_List;

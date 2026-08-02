@@ -1,6 +1,6 @@
 import Navbar from "./component/Navbar/Navbar";
-import Home from "./component/Home/Home.js";
-import Product_List from "./component/Products/Product_List.js";
+// import Home from "./component/Home/Home.js";
+// import Product_List from "./component/Products/Product_List.js";
 import { Outlet } from "react-router-dom";
 const App = () => {
   return (
