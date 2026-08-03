@@ -62,7 +62,7 @@ const Cart = () => {
                           className="cursor-pointer select-none"
                           onClick={() => Decreaseqty(item.id)}
                         >
-                          -
+                          - 
                         </span>
                         {item.quantity}
                         <span
