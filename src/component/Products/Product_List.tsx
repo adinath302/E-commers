@@ -19,6 +19,8 @@ const Product_List = () => {
     limit: 12,
   }); // the initial state is object
 
+  // const [currentPage, setCurrentPage] = useState(1);
+
   const filteredProducts = useFilteredProducts(
     // function implementation
     data?.products ?? [],
@@ -94,11 +96,11 @@ const Product_List = () => {
         })}
       </div>
       {/* pagination */}
-    <div>
-      <Pagination/>
-    </div>
+      <div>
+        <Pagination />
+      </div>
     </div>
   );
 };
-  
+
 export default Product_List;

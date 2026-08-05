@@ -8,52 +8,33 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./component/Login/Login.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Cart from "./component/cart/Cart.tsx";
+import ErrorPage from "./pages/ErrorPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: (
-      <div className="flex h-screen items-center justify-center text-xl font-bold">
-        404 - Page Not Found
-      </div>
-    ),
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true, // this is the default route
         element: <Home />,
-        errorElement: (
-          <div className="flex h-screen items-center justify-center text-xl font-bold">
-            404 - Page Not Found
-          </div>
-        ),
+        errorElement: <ErrorPage />,
       },
       {
         path: "products",
         element: <Product_List />,
-        errorElement: (
-          <div className="flex h-screen items-center justify-center text-xl font-bold">
-            404 - Page Not Found
-          </div>
-        ),
+        errorElement: <ErrorPage />,
       },
       {
         path: "login",
         element: <Login />,
-        errorElement: (
-          <div className="flex h-screen items-center justify-center text-xl font-bold">
-            404 - Page Not Found
-          </div>
-        ),
+        errorElement: <ErrorPage />,
       },
       {
         path: "Cart",
         element: <Cart />,
-        errorElement: (
-          <div className="flex h-screen items-center justify-center text-xl font-bold">
-            404 - Page Not Found
-          </div>
-        ),
+        errorElement: <ErrorPage />,
       },
     ],
   },
