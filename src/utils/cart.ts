@@ -1,7 +1,7 @@
 // Ensure 'export' is present for every variable and function
 export const calculateSubTotal = (cart: any) => {
   let total = 0;
-  cart.forEach((item: any) => (total += item.price * item.quantity));
+  cart.forEach((item:any) => (total += item.price * item.quantity));
   return Math.round(total * 100) / 100;
 };
 

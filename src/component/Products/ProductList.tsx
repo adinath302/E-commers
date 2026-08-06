@@ -1,4 +1,4 @@
-import Product from "./Product";
+import Product from "./ProductCard";
 import Search from "./Search";
 import { useState } from "react";
 import { useProducts } from "../../hooks/useProducts";

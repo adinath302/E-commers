@@ -5,19 +5,15 @@ import { IoCartOutline } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import useCartStore from "../../store/useCartStore";
-
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Product", href: "/Products" },
-  { label: "Login", href: "/Login" },
-];
+import MobileSidebar from "./MobileSidebar";
+import Logo from "./Logo";
+import CartButton from "./CartButton";
+import DesktopNav from "./DesktopNav";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const quantity = useCartStore((state) => state.cart.length);
 
-  // console.log("quantity", quantity);
-  
   return (
     <div className="py-3 sticky top-0 relative z-50 bg-gray-200 items-center justify-between px-4 gap-10 flex">
       {/* Menu Icon: Only visible on mobile screens */}
@@ -25,82 +21,22 @@ const Navbar = () => {
         <AiOutlineBars onClick={() => setIsOpen(true)} aria-label="Open Menu" />
       </div>
 
-      <div className="flex-none ml-20 sm:ml-0 font-bold text-purple-500">
-        <Link to="/">E-commers</Link>
-      </div>
+      <Logo />
 
       {/* Desktop Links: Hidden on mobile, visible on sm and up */}
-      <div className="hidden sm:block">
-        <ul className="flex gap-6 items-center flex-1">
-          {NAV_LINKS.map((link) => (
-            <li key={link.label} className="animated-underline cursor-pointer">
-              <Link to={link.href} className="block w-full py-1">
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <DesktopNav />
 
       {/* Mobile Sidebar: Controlled entirely by the isOpen state */}
-      <MobailSidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <MobileSidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />
 
       <div>
         <ul className="flex gap-6 items-center flex-1">
-          <li className="cursor-pointer relative flex  text-[11px]">
-            <Link to="/Cart" className="relative flex items-center">
-              <span className="absolute right-[-8px] top-[-8px] w-[18px] h-[18px]  bg-red-600 rounded-full flex justify-center items-center text-white text-[11px]]">
-                {quantity}
-              </span>
-              <IoCartOutline className="text-[19px]" />
-            </Link>
-          </li>
+          <CartButton quantity={quantity} />
           <li className="cursor-pointer">
             <CgProfile />
           </li>
         </ul>
       </div>
-    </div>
-  );
-};
-
-interface Mobailview {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const MobailSidebar = ({ isOpen, onClose }: Mobailview) => {
-  return (
-    <div
-      // Fixed the transform logic so it pops out correctly based on isOpen state
-      className={`fixed top-0 left-[-400px] z-50 bg-gray-100 w-64 h-screen transition-all duration-500 ${
-        isOpen ? "translate-x-[400px]" : "translate-x-0"
-      }`}
-    >
-      {/* close button on mobail view */}
-      <div className="absolute top-0 right-0 p-3">
-        <RxCross2 onClick={onClose} className="cursor-pointer" />
-      </div>
-
-      <ul className="flex flex-col gap-8 mt-4 w-64">
-        <div className="flex-none mx-auto font-bold text-purple-500">
-          E-commers
-        </div>
-        {NAV_LINKS.map((link) => (
-          <li
-            key={link.label}
-            className="animated-underline block w-full cursor-pointer pl-4 hover:bg-gray-400 select-none"
-          >
-            <Link
-              to={link.href}
-              onClick={onClose}
-              className="w-full py-1 block"
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };

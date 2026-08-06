@@ -11,12 +11,10 @@ interface CartState {
   decreaseQuantity: (id: number) => void;
   removeProduct: (id: number) => void;
 }
-
 const useCartStore = create<CartState>()(
   persist(
     (set) => ({
       cart: [],
-
       // Add to cart
       addToCart: (product) =>
         set((state) => {

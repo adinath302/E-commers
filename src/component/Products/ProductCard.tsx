@@ -1,16 +1,14 @@
 import useCartStore from "../../store/useCartStore";
+import type { cartProductItem } from "../../types/cart";
 
-type Props = {
-  title: string;
-  price: number;
-  description: string;
-  image: string;
-  cate: "string";
-  id: number;
-  item: any;
-};
-
-const Product = ({ title, price, description, image, cate, item }: Props) => {
+const ProductCard = ({
+  title,
+  price,
+  description,
+  image,
+  cate,
+  item,
+}: cartProductItem) => {
   const HandleAddtocart = useCartStore((state) => state.addToCart);
   return (
     <div className="flex flex-col bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden h-full w-full">
@@ -54,4 +52,4 @@ const Product = ({ title, price, description, image, cate, item }: Props) => {
   );
 };
 
-export default Product;
+export default ProductCard;
