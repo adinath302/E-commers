@@ -1,4 +1,3 @@
-import Product from "./ProductCard";
 import Search from "./Search";
 import { useState } from "react";
 import { useProducts } from "../../hooks/useProducts";
@@ -6,6 +5,8 @@ import useFilteredProducts from "../../hooks/useFilteredProducts";
 import type { Filters } from "../../types/Filters";
 import Categories from "./Categories";
 import Pagination from "../Pagination/Pagination";
+import ProductCard from "./ProductCard";
+import type { Product } from "../../types/product";
 const loading = "/loading.svg";
 const Product_List = () => {
   const { data, isFetching, error } = useProducts();
@@ -79,18 +80,10 @@ const Product_List = () => {
       </div>
       {/* fetch products */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {filteredProducts?.map((item: any) => {
+        {filteredProducts?.map((item: Product) => {
           return (
             <div key={item.id} className="">
-              <Product
-                description={item.description}
-                title={item.title}
-                price={item.price}
-                image={item.images[0]}
-                cate={item.category}
-                id={item.id}
-                item={item}
-              />
+              <ProductCard item={item} />
             </div>
           );
         })}

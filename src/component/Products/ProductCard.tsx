@@ -1,22 +1,24 @@
 import useCartStore from "../../store/useCartStore";
-import type { cartProductItem } from "../../types/cart";
+import type { Product } from "../../types/product";
 
-const ProductCard = ({
-  title,
-  price,
-  description,
-  image,
-  cate,
-  item,
-}: cartProductItem) => {
+interface ProductData {
+  item: Product;
+}
+
+const ProductCard = ({ item }: ProductData) => {
+  const { images, title, description, price, category } = item;
+
   const HandleAddtocart = useCartStore((state) => state.addToCart);
+  const displayImage =
+    images && images.length > 0 ? images[0] : "https://placehold.co";
+
   return (
     <div className="flex flex-col bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden h-full w-full">
       <div className="h-48 w-full bg-gray-100 overflow-hidden">
         <img
-          src={image}
+          src={displayImage}
           loading="lazy"
-          alt=""
+          alt={title || "Product Image"}
           className="w-full h-full object-cover"
         />
       </div>
@@ -26,7 +28,7 @@ const ProductCard = ({
           <h1 className="font-semibold text-black text-lg line-clamp-1">
             {title}
           </h1>
-          <div className="text-sm font-semibold text-gray-600">{cate}</div>
+          <div className="text-sm font-semibold text-gray-600">{category}</div>
         </div>
         {/* description */}
         <div className="font-normal text-sm leading-5 text-gray-600 mt-1 line-clamp-3">

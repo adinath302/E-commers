@@ -9,6 +9,7 @@ import MobileSidebar from "./MobileSidebar";
 import Logo from "./Logo";
 import CartButton from "./CartButton";
 import DesktopNav from "./DesktopNav";
+import ProfileButton from "./ProfileButton";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,11 +33,10 @@ const Navbar = () => {
       <div>
         <ul className="flex gap-6 items-center flex-1">
           <CartButton quantity={quantity} />
-          <li className="cursor-pointer">
-            <CgProfile />
-          </li>
+          <ProfileButton />
         </ul>
       </div>
+      
     </div>
   );
 };

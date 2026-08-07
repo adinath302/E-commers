@@ -1,26 +1,16 @@
-import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import useCartStore from "../../store/useCartStore";
+import { memo } from "react";
 
-const CartItem = () => {
-  const { cart, increaseQuantity, decreaseQuantity, removeProduct } =
-    useCartStore((state) => ({
-      cart: state.cart,
-      increaseQuantity: state.increaseQuantity,
-      decreaseQuantity: state.decreaseQuantity,
-      removeProduct: state.removeProduct,
-    }));
+const CartItem = memo(() => {
+  const cart = useCartStore((state) => state.cart);
+  const increaseQuantity = useCartStore((state) => state.increaseQuantity);
+  const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
+  const removeProduct = useCartStore((state) => state.removeProduct);
   console.log("cartitem", cart);
   return (
     <>
-      <section className="flex justify-center items-center mt-7 sm:mt-5 sm:mb-9 mb-15">
-        {cart.length > 0 && (
-          <h1 className="font-semibold text-black text-xl sm:text-3xl line-clamp-1">
-            Shopping Cart
-          </h1>
-        )}
-      </section>
-
+      {/* cart items */}
       {cart.map((item) => {
         return (
           <section
@@ -87,6 +77,8 @@ const CartItem = () => {
       )}
     </>
   );
-};
+});
+
+CartItem.displayName = "CartItem";
 
 export default CartItem;

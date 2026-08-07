@@ -9,7 +9,7 @@ export type cartProduct = {
   price: number;
   description: string;
   image: string;
-  cate: "string";
+  cate: string;
   id: number;
 };
 
