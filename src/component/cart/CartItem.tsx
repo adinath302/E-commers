@@ -7,7 +7,9 @@ const CartItem = memo(() => {
   const increaseQuantity = useCartStore((state) => state.increaseQuantity);
   const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
   const removeProduct = useCartStore((state) => state.removeProduct);
-  console.log("cartitem", cart);
+
+  // console.log("cartitem", cart);
+  
   return (
     <>
       {/* cart items */}
@@ -34,19 +36,19 @@ const CartItem = memo(() => {
                   {item.title}
                 </h1>
                 <div className="text-gray-700 text-sm flex gap-4 border rounded-2xl sm:px-2 sm:py-1 px-2 py-1">
-                  <span
+                  <button
                     className="cursor-pointer select-none"
                     onClick={() => decreaseQuantity(item.id)}
                   >
                     -
-                  </span>
+                  </button>
                   {item.quantity}
-                  <span
+                  <button
                     className="cursor-pointer select-none"
                     onClick={() => increaseQuantity(item.id)}
                   >
                     +
-                  </span>
+                  </button>
                 </div>
               </div>
 
@@ -55,13 +57,13 @@ const CartItem = memo(() => {
                 <div className="font-semibold items-end sm:text-[18px] text-black">
                   {/* price */}${item.price}
                 </div>
-                <div className="flex items-end justify-end">
+                <button
+                  className="flex items-end justify-en cursor-pointer select-none text-gray-500"
+                  onClick={() => removeProduct(item.id)}
+                >
                   {/*  remove button */}
-                  <AiOutlineDelete
-                    onClick={() => removeProduct(item.id)}
-                    className="cursor-pointer select-none text-gray-500"
-                  />
-                </div>
+                  <AiOutlineDelete className="" />
+                </button>
               </div>
             </div>
             <div className="absolute bottom-0 left-0 right-0 h-[1px] [background:linear-gradient(to_right,transparent,theme(colors.gray.300)_20%,theme(colors.gray.300)_80%,transparent)]"></div>

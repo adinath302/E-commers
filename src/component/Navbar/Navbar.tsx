@@ -6,20 +6,23 @@ import CartButton from "./CartButton";
 import DesktopNav from "./DesktopNav";
 import ProfileButton from "./ProfileButton";
 import { AiOutlineBars } from "react-icons/ai";
-import { calculatecartQuantity } from "../../utils/cart";
+import { calculateTotalQuantiy } from "../../utils/cart";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const cart = useCartStore((state) => state.cart);
-  const quantity = calculatecartQuantity(cart) + cart.length;
+  const quantity = calculateTotalQuantiy(cart) + cart.length;
 
   return (
     <div className="py-3 sticky top-0 relative z-50 bg-gray-200 items-center justify-between px-4 gap-10 flex">
       {/* Menu Icon: Only visible on mobile screens */}
-      <div className="sm:hidden cursor-pointer">
-        <AiOutlineBars onClick={() => setIsOpen(true)} aria-label="Open Menu" />
-      </div>
+      <button
+        className="sm:hidden cursor-pointer"
+        onClick={() => setIsSidebarOpen(true)}
+      >
+        <AiOutlineBars aria-label="Open navigation menu" />
+      </button>
 
       <Logo />
 
@@ -27,13 +30,21 @@ const Navbar = () => {
       <DesktopNav />
 
       {/* Mobile Sidebar: Controlled entirely by the isOpen state */}
-      <MobileSidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <MobileSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
 
       <div>
-        <ul className="flex gap-6 items-center flex-1">
-          <CartButton quantity={quantity} />
+        <div className="flex gap-6 items-center flex-1">
+          <div className="relative flex items-center">
+            <CartButton />
+            <span className="absolute right-[-8px] top-[-8px] w-[15px] h-[15px]  bg-red-600 rounded-full flex justify-center items-center text-white text-[10px]">
+              {quantity}
+            </span>
+          </div>
           <ProfileButton />
-        </ul>
+        </div>
       </div>
     </div>
   );

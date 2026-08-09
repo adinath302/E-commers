@@ -5,9 +5,9 @@ const ProfileButton = () => {
   return (
     <div>
       {" "}
-      <li className="cursor-pointer">
+      <div className="cursor-pointer">
         <CgProfile />
-      </li>
+      </div>
     </div>
   );
 };

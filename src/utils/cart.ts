@@ -18,8 +18,8 @@ export const calculateTotalCost = (cart: any) => {
   return calculateSubTotal(cart) + SHIPPING_COST;
 };
 
-export const calculatecartQuantity = (cart: CartItem[]) => {
+export const calculateTotalQuantiy = (cartq: CartItem[]) => {
   let total = 0;
-  cart.forEach((item) => (total += item.quantity));
+  cartq.forEach((item) => (total += item.quantity));
   return total;
 };
