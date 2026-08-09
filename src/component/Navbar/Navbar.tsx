@@ -1,19 +1,18 @@
 import { useState } from "react";
-import { AiOutlineBars } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
-import { IoCartOutline } from "react-icons/io5";
-import { RxCross2 } from "react-icons/rx";
-import { Link } from "react-router-dom";
 import useCartStore from "../../store/useCartStore";
 import MobileSidebar from "./MobileSidebar";
 import Logo from "./Logo";
 import CartButton from "./CartButton";
 import DesktopNav from "./DesktopNav";
 import ProfileButton from "./ProfileButton";
+import { AiOutlineBars } from "react-icons/ai";
+import { calculatecartQuantity } from "../../utils/cart";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const quantity = useCartStore((state) => state.cart.length);
+
+  const cart = useCartStore((state) => state.cart);
+  const quantity = calculatecartQuantity(cart) + cart.length;
 
   return (
     <div className="py-3 sticky top-0 relative z-50 bg-gray-200 items-center justify-between px-4 gap-10 flex">
@@ -36,7 +35,6 @@ const Navbar = () => {
           <ProfileButton />
         </ul>
       </div>
-      
     </div>
   );
 };

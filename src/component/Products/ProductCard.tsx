@@ -9,6 +9,7 @@ const ProductCard = ({ item }: ProductData) => {
   const { images, title, description, price, category } = item;
 
   const HandleAddtocart = useCartStore((state) => state.addToCart);
+  
   const displayImage =
     images && images.length > 0 ? images[0] : "https://placehold.co";
 
