@@ -5,6 +5,7 @@ import Home from "../component/Home/Home";
 import Login from "../component/Login/Login";
 import Product_List from "../component/Products/ProductList";
 import ErrorPage from "../pages/ErrorPage";
+// import ProductDetails from "../component/Products/ProductDetails";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: "products",
         element: <Product_List />,
+      },
+      {
+        path: "products/:productId",
+        element: <h1>Product Details</h1>,
       },
       {
         path: "login",
