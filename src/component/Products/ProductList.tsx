@@ -7,7 +7,7 @@ import Categories from "./Categories";
 import Pagination from "../Pagination/Pagination";
 import ProductCard from "./ProductCard";
 import type { Product } from "../../types/product";
-const loading = "/loading.svg";
+import Loading from "../Loading";
 const Product_List = () => {
   const { data, isFetching, error } = useProducts();
   const [filters, setFilters] = useState<Filters>({
@@ -30,11 +30,7 @@ const Product_List = () => {
 
   // Loading
   if (isFetching) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <img className="w-150 flex" src={loading} alt="Loading..." />
-      </div>
-    );
+    return <Loading />;
   }
 
   // Error handling
