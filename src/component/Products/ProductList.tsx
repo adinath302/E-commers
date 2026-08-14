@@ -7,7 +7,7 @@ import Categories from "./Categories";
 import Pagination from "../Pagination/Pagination";
 import ProductCard from "./ProductCard";
 import type { Product } from "../../types/product";
-import Loading from "../Loading";
+import Loading from "../../pages/Loading";
 const Product_List = () => {
   const { data, isFetching, error } = useProducts();
   const [filters, setFilters] = useState<Filters>({

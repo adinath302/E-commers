@@ -12,7 +12,8 @@ interface CartState {
   removeProduct: (id: number) => void;
 }
 const useCartStore = create<CartState>()(
-  persist( // with persist the cart will be saved in the local storage
+  persist(
+    // with persist the cart will be saved in the local storage
     (set) => ({
       cart: [],
       // Add to cart
@@ -75,8 +76,7 @@ const useCartStore = create<CartState>()(
           cart: state.cart.filter((item) => item.id !== id),
         })),
 
-        // total cart quantitgy
-
+      // total cart quantitgy
     }), // 4. FIXED: Properly closed the store configuration function
     {
       name: "cart-storage", // This configuration object is now correctly passed as the second argument to persist

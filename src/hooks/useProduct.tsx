@@ -5,6 +5,6 @@ export const useProduct = (productId: number | undefined) => {
   return useQuery({
     queryKey: ["product", productId],
     queryFn: () => productService.getProduct(productId!),
-    enabled: productId! == undefined,
+    enabled: productId !== undefined,
   });
 };

@@ -1,10 +1,9 @@
 import type { Product } from "../types/product";
 
 export const productService = {
-  getProduct: async (id: number): Promise<Product> => {
-    const response = await fetch(
-      `https://dummyjson.com/products/${id}`
-    );
+  getProduct: async (productId: number): Promise<Product> => {
+    const id = Number(productId); // change the type of productId to number 
+    const response = await fetch(`https://dummyjson.com/products/${id}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch product");
@@ -19,7 +18,7 @@ export const productService = {
     skip: number;
     limit: number;
   }> => {
-    const response = await fetch("https://dummyjson.com/products");
+    const response = await fetch("https://dummyjson.com/products?limit=0&skip=0");
 
     if (!response.ok) {
       throw new Error("Failed to fetch products");
