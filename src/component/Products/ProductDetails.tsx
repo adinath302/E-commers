@@ -38,10 +38,8 @@ const ProductDetails = () => {
   }
 
   const handleAddToCart = () => {
-    for (let i = 0; i < quantity; i++) {
-      addToCart(product)
-      setQuantity(1)
-    }
+    addToCart(product, quantity)
+    setQuantity(1)
   }
 
   return (
@@ -105,6 +103,7 @@ const ProductDetails = () => {
               <button
                 type='button'
                 onClick={handleDecrease}
+                disabled={quantity <= 1}
                 className='px-4 py-2 text-lg'
               >
                 -
@@ -115,6 +114,7 @@ const ProductDetails = () => {
               <button
                 type='button'
                 onClick={handleIncrease}
+                disabled={quantity >= product.stock}
                 className='px-4 py-2 text-lg'
               >
                 +
