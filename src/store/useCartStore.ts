@@ -2,8 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware"; // 1. ADDED: Required import for persist
 import type { Product } from "../types/product";
 import type { CartItem } from "../types/cart";
-import Cart from "../component/Cart/Cart";
-import ProductCard from "../component/Products/ProductCard";
+
 // 2. REMOVED: useLocalStorage import as it is no longer needed
 
 interface CartState {
@@ -25,7 +24,7 @@ const useCartStore = create<CartState>()(
         set((state) => {
           const existingItem = state.cart.find(
             (item) => item.id === product.id,
-          );
+          ); 
           const currentQuantity = existingItem?.quantity ?? 0;
           const newQuantity = currentQuantity + quantity;
 
@@ -58,10 +57,11 @@ const useCartStore = create<CartState>()(
 
       // increase quantity
       increaseQuantity: (id: number) =>
+        
         set((state) => {
           return {
             cart: state.cart.map((item) => {
-              if (item.id === id && item.quantity < 100) {
+              if (item.id === id && item.quantity < item.stock) {
                 return {
                   ...item,
                   quantity: item.quantity + 1,
