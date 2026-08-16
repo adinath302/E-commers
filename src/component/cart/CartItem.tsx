@@ -7,9 +7,8 @@ const CartItem = memo(() => {
   const increaseQuantity = useCartStore((state) => state.increaseQuantity);
   const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
   const removeProduct = useCartStore((state) => state.removeProduct);
-
   // console.log("cartitem", cart);
-  
+
   return (
     <>
       {/* cart items */}
@@ -39,6 +38,7 @@ const CartItem = memo(() => {
                   <button
                     className="cursor-pointer select-none"
                     onClick={() => decreaseQuantity(item.id)}
+                    disabled={item.quantity <= 1}
                   >
                     -
                   </button>
@@ -46,6 +46,7 @@ const CartItem = memo(() => {
                   <button
                     className="cursor-pointer select-none"
                     onClick={() => increaseQuantity(item.id)}
+                    disabled={item.quantity >= item.stock}
                   >
                     +
                   </button>

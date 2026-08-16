@@ -5,6 +5,7 @@ import useCartStore from '../../store/useCartStore'
 
 const ProductDetails = () => {
   const { productId } = useParams()
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const {
     data: product,
@@ -38,8 +39,15 @@ const ProductDetails = () => {
   }
 
   const handleAddToCart = () => {
-    addToCart(product, quantity)
+    const success: any = addToCart(product, quantity)
     setQuantity(1)
+    if (!success) {
+      setErrorMessage(
+        `Not enough stock. Only ${product.stock} items available.`
+      )
+    } else {
+      setErrorMessage(null)
+    }
   }
 
   return (
@@ -129,6 +137,12 @@ const ProductDetails = () => {
           >
             Add to Cart
           </button>
+          {/* error message when out of stock */}
+          {errorMessage && (
+            <p style={{ color: 'red', marginTop: '8px', fontSize: '14px' }}>
+              {errorMessage}
+            </p>
+          )}
         </section>
       </div>
     </main>

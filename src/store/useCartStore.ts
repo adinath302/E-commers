@@ -19,22 +19,22 @@ const useCartStore = create<CartState>()(
     (set) => ({
       cart: [],
       // Add to cart
-      addToCart: (product, quantity = 1) =>
+      addToCart: (product, quantity = 1) => {
+        let isAdded = false;
+
         set((state) => {
           const existingItem = state.cart.find(
             (item) => item.id === product.id,
           );
-
           const currentQuantity = existingItem?.quantity ?? 0;
-          // const requestedQuantity = quantity ?? 1;
           const newQuantity = currentQuantity + quantity;
 
           if (newQuantity > product.stock) {
-            alert(
-              `Cannot add to cart. Maximum stock available is ${product.stock}`,
-            );
+            isAdded = false;
             return state;
           }
+
+          isAdded = true;
 
           if (existingItem) {
             // if the item is already in the cart, increase the quantity
@@ -52,7 +52,9 @@ const useCartStore = create<CartState>()(
           return {
             cart: [...state.cart, { ...product, quantity }],
           };
-        }),
+        });
+        return isAdded;
+      },
 
       // increase quantity
       increaseQuantity: (id: number) =>
