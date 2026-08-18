@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import useCartStore from "../../store/useCartStore";
 import type { Product } from "../../types/product";
+import { CiHeart } from "react-icons/ci";
+import useWishlistStore from "../../store/useWishlistStore";
+import { FaHeart } from "react-icons/fa";
 
 interface ProductData {
   item: Product;
@@ -14,8 +17,14 @@ const ProductCard = ({ item }: ProductData) => {
   const displayImage =
     images && images.length > 0 ? images[0] : "https://placehold.co";
 
+  const toggleWishlist = useWishlistStore((state) => state.toggleWishlist);
+
+  const isLiked = useWishlistStore((state) =>
+    state.wishlist.some((product) => product?.id === id),
+  );
+
   return (
-    <div className="flex flex-col bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden h-full w-full">
+    <div className="flex relative flex-col bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden h-full w-full">
       <Link
         to={`/products/${id}`}
         className="h-48 w-full bg-gray-100 overflow-hidden"
@@ -27,6 +36,15 @@ const ProductCard = ({ item }: ProductData) => {
           className="w-full h-full object-cover"
         />
       </Link>
+      {/* WishList ui Button */}
+      <div className="absolute top-2 right-2">
+        <button
+          className="text-2xl hover:cursor-pointer"
+          onClick={() => toggleWishlist(item)}
+        >
+          {isLiked ? <FaHeart className="text-red-500" /> : <CiHeart />}
+        </button>
+      </div>
       <div className="flex flex-col grow p-2 justify-between gap-1">
         <div className="flex justify-between items-center">
           {/* title */}
