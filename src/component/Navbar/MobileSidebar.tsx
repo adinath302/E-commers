@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { NAV_LINKS } from "./NavLinks";
 import { RxCross2 } from "react-icons/rx";
@@ -9,9 +9,10 @@ interface Mobailview {
 }
 
 const MobileSidebar = ({ isOpen, onClose }: Mobailview) => {
+
   return (
     <div
-      className={`fixed top-0 left-[-400px] z-50 bg-gray-100 w-64 h-screen transition-all duration-500 ${
+      className={`fixed sm:hidden top-0 left-[-400px] z-50 bg-gray-100 w-64 h-screen transition-all duration-500 ${
         isOpen ? "translate-x-[400px]" : "translate-x-0"
       }`}
     >

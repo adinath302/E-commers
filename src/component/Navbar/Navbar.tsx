@@ -10,6 +10,7 @@ import { calculateTotalQuantiy } from "../../utils/cart";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Wishlist from "../Wishlist/Wishlist";
+import { LuHeart } from "react-icons/lu";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -42,7 +43,7 @@ const Navbar = () => {
         <div className="flex gap-6 items-center flex-1">
           <div className="cursor-pointer flex text-md">
             <Link to="/wishlist">
-              <IoMdHeartEmpty />
+              <LuHeart />
             </Link>
           </div>
           <div className="relative flex items-center">

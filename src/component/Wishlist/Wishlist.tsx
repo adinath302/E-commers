@@ -1,11 +1,11 @@
 import useCartStore from "../../store/useCartStore";
 import useWishlistStore from "../../store/useWishlistStore";
-import { MdOutlineDelete } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const Wishlist = () => {
   const Wishlist = useWishlistStore((state) => state.wishlist);
   console.log("Wishlist data:", Wishlist);
-
+  
   const validWishlist = Wishlist?.filter((item) => item && item.id) ?? [];
 
   const AddtoCart = useCartStore((state) => state.addToCart);
@@ -21,12 +21,12 @@ const Wishlist = () => {
         {/* Product */}
         {validWishlist?.map((item) => (
           <div
-            className="grid grid-cols-2 sm:grid-cols-4 items-center"
+            className="grid grid-cols-2 sm:grid-cols-4 items-center border-b border-gray-200"
             key={item.id}
           >
-            <div className="flex sm:items-center sm:gap-2">
+            <div className="flex sm:items-center gap-5">
               {/* remove button */}
-              <MdOutlineDelete
+              <MdDelete
                 onClick={() => removeWish(item.id)}
                 className="text-xl text-gray-500 cursor-pointer"
               />
@@ -50,7 +50,9 @@ const Wishlist = () => {
 
             {/* Product Title */}
             <div>
-              <p className="font-semibold text-md text-gray-500">{item?.title}</p>
+              <p className="font-semibold text-md text-gray-500">
+                {item?.title}
+              </p>
             </div>
 
             {/*Add to cart  */}
@@ -68,13 +70,16 @@ const Wishlist = () => {
       {/* mobail view */}
 
       <section className="sm:hidden">
-        <h1 className="sm:hidden flex items-center justify-center mt-3">
+        <h1 className="sm:hidden flex items-center text-xl justify-center my-3 font-semibold">
           Wishlist
         </h1>
-        <div className="grid-cols-2 grid">
+        <div className="grid-cols-2 grid gap-3 p-3">
           {/* Product */}
           {validWishlist?.map((item) => (
-            <div className="grid grid-cols-1 items-center p-3" key={item.id}>
+            <div
+              className="flex flex-col justify-between border border-gray-200 rounded-sm bg-white shadow-sm shadow-purple-300 items-center p-3 "
+              key={item.id}
+            >
               <div className="flex items-center justify-center relative">
                 {/* product Image */}
                 {item?.images?.length > 0 && (
@@ -86,8 +91,9 @@ const Wishlist = () => {
                     />
                   </div>
                 )}
+
                 {/* remove button */}
-                <MdOutlineDelete
+                <MdDelete
                   onClick={() => removeWish(item.id)}
                   className="text-xl absolute top-2 right-2 text-gray-500 cursor-pointer"
                 />
@@ -95,7 +101,9 @@ const Wishlist = () => {
 
               {/* Product Title */}
               <div>
-                <p className="font-semibold text-md text-gray-500">{item?.title}</p>
+                <p className="font-semibold text-md text-gray-500">
+                  {item?.title}
+                </p>
               </div>
 
               {/* price */}
