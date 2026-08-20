@@ -7,6 +7,7 @@ import Product_List from "../component/Products/ProductList";
 import ErrorPage from "../pages/ErrorPage";
 import ProductDetails from "../component/Products/ProductDetails";
 import Wishlist from "../component/Wishlist/Wishlist";
+import CartDetails from "../component/Cart/CartDetails.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "cart/:cartId",
+        element: <CartDetails />,
       },
       {
         path: "wishlist",

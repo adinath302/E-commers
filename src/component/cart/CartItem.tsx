@@ -1,6 +1,7 @@
 import { AiOutlineDelete } from "react-icons/ai";
 import useCartStore from "../../store/useCartStore";
 import { memo } from "react";
+import { Link } from "react-router-dom";
 
 const CartItem = memo(() => {
   const cart = useCartStore((state) => state.cart);
@@ -19,21 +20,27 @@ const CartItem = memo(() => {
             className="relative flex bg-white overflow-hidden gap-3 p-4 inset-x-0 bottom-0"
           >
             {/* image */}
-            <div className="sm:h-24 sm:w-24  h-18 w-18 bg-gray-100 overflow-hidden ">
+            <Link
+              to={`/cart/${item.id}`}
+              className="sm:h-24 sm:w-24 cursor-pointer h-18 w-18 bg-gray-100 overflow-hidden "
+            >
               <img
                 src={item.images[0]}
                 loading="lazy"
                 alt=""
                 className="w-full h-full object-cover"
               />
-            </div>
+            </Link>
 
             <div className="flex grow justify-between gap-4">
               <div className="flex-col flex justify-between items-start">
                 {/* title & quantity */}
-                <h1 className="overflow-hidden font-normal text-sm sm:text-[16px] text-black line-clamp-1">
+                <Link
+                  to={`/cart/${item.id}`}
+                  className="overflow-hidden font-normal text-sm sm:text-[16px] text-black line-clamp-1"
+                >
                   {item.title}
-                </h1>
+                </Link>
                 <div className="text-gray-700 text-sm flex gap-4 border rounded-2xl sm:px-2 sm:py-1 px-2 py-1">
                   <button
                     className="cursor-pointer select-none"

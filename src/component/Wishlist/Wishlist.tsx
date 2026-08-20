@@ -75,7 +75,7 @@ const Wishlist = () => {
         </h1>
         <div className="grid-cols-2 grid gap-3 p-3">
           {/* Product */}
-          {validWishlist?.map((item) => (
+          {Wishlist?.map((item) => (
             <div
               className="flex flex-col justify-between border border-gray-200 rounded-sm bg-white shadow-sm shadow-purple-300 items-center p-3 "
               key={item.id}
