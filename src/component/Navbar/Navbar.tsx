@@ -7,6 +7,9 @@ import DesktopNav from "./DesktopNav";
 import ProfileButton from "./ProfileButton";
 import { AiOutlineBars } from "react-icons/ai";
 import { calculateTotalQuantiy } from "../../utils/cart";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { Link } from "react-router-dom";
+import Wishlist from "../Wishlist/Wishlist";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -37,6 +40,11 @@ const Navbar = () => {
 
       <div>
         <div className="flex gap-6 items-center flex-1">
+          <div className="cursor-pointer flex text-md">
+            <Link to="/wishlist">
+              <IoMdHeartEmpty />
+            </Link>
+          </div>
           <div className="relative flex items-center">
             <CartButton />
             <span className="absolute right-[-8px] top-[-8px] w-[15px] h-[15px]  bg-red-600 rounded-full flex justify-center items-center text-white text-[10px]">

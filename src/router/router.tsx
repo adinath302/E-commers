@@ -6,6 +6,7 @@ import Login from "../component/Login/Login";
 import Product_List from "../component/Products/ProductList";
 import ErrorPage from "../pages/ErrorPage";
 import ProductDetails from "../component/Products/ProductDetails";
+import Wishlist from "../component/Wishlist/Wishlist";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "wishlist",
+        element: <Wishlist />,
       },
     ],
   },

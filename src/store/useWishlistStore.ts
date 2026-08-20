@@ -13,41 +13,41 @@ const useWishlistStore = create<WishlistState>()(
   persist(
     (set, get) => ({
       wishlist: [],
-      
+
       addToWishlist: (product) => {
         if (!product?.id) return;
         set((state) => ({
           wishlist: [...state.wishlist, product],
         }));
       },
-      
+
       removeFromWishlist: (id) =>
         set((state) => ({
           wishlist: state.wishlist.filter((item) => item.id !== id),
         })),
-        
-        toggleWishlist: (product) => {
-          if (!product?.id) return;
-          const exists = get().wishlist.some((item) => item?.id === product.id);
-          
-          if (exists) {
-            set((state) => ({
-              wishlist: state.wishlist.filter((item) => item?.id !== product.id),
-            }));
-          } else {
-            set((state) => ({
-              wishlist: [...state.wishlist, product],
-            }));
-          }
-        },
-        
-        isInWishlist: (id) =>
-          get().wishlist?.some((item) => item?.id === id) ?? false,
-      }),
-      {
-        name: "wishlist-storage",
+
+      toggleWishlist: (product) => {
+        if (!product?.id) return;
+        const exists = get().wishlist.some((item) => item?.id === product.id);
+
+        if (exists) {
+          set((state) => ({
+            wishlist: state.wishlist.filter((item) => item?.id !== product.id),
+          }));
+        } else {
+          set((state) => ({
+            wishlist: [...state.wishlist, product],
+          }));
+        }
       },
-    ),
-  );
+
+      isInWishlist: (id) =>
+        get().wishlist?.some((item) => item?.id === id) ?? false,
+    }),
+    {
+      name: "wishlist-storage",
+    },
+  ),
+);
 
 export default useWishlistStore;

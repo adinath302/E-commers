@@ -20,7 +20,7 @@ const ProductCard = ({ item }: ProductData) => {
   const toggleWishlist = useWishlistStore((state) => state.toggleWishlist);
 
   const isLiked = useWishlistStore((state) =>
-    state.wishlist.some((product) => product.id === id),
+    state.wishlist.some((product) => product?.id === id),
   );
 
   return (
