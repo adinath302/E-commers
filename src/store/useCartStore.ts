@@ -15,26 +15,23 @@ interface CartState {
 const useCartStore = create<CartState>()(
   persist(
     // with persist the cart will be saved in the local storage
-    (set) => ({
+    (set, get) => ({
       cart: [],
       // Add to cart
       addToCart: (product, quantity = 1) => {
-        let isAdded = false;
+        const { cart } = get();
+        const existingItem = cart.find((item) => item.id === product.id);
+        const currentQuantity = existingItem?.quantity ?? 0;
+        const newQuantity = currentQuantity + quantity;
 
+        // stock validation check
+        if (newQuantity > product.stock) {
+          alert(`Not enough stock. Only ${product.stock} items available.`);
+          return false;
+        }
+
+        // update cart state
         set((state) => {
-          const existingItem = state.cart.find(
-            (item) => item.id === product.id,
-          ); 
-          const currentQuantity = existingItem?.quantity ?? 0;
-          const newQuantity = currentQuantity + quantity;
-
-          if (newQuantity > product.stock) {
-            isAdded = false;
-            return state;
-          }
-
-          isAdded = true;
-
           if (existingItem) {
             // if the item is already in the cart, increase the quantity
             return {
@@ -44,49 +41,34 @@ const useCartStore = create<CartState>()(
                   : item,
               ),
             };
-          } else {
-            alert("Stock is not enough");
           }
 
           return {
             cart: [...state.cart, { ...product, quantity }],
           };
         });
-        return isAdded;
+        return true;
       },
 
       // increase quantity
       increaseQuantity: (id: number) =>
-        
-        set((state) => {
-          return {
-            cart: state.cart.map((item) => {
-              if (item.id === id && item.quantity < item.stock) {
-                return {
-                  ...item,
-                  quantity: item.quantity + 1,
-                };
-              }
-              return item;
-            }),
-          };
-        }),
+        set((state) => ({
+          cart: state.cart.map((item) =>
+            item.id === id && item.quantity < item.stock
+              ? { ...item, quantity: item.quantity + 1 }
+              : item,
+          ),
+        })),
 
       // decrease quantity
       decreaseQuantity: (id: number) =>
-        set((state) => {
-          return {
-            cart: state.cart.map((item) => {
-              if (item.id === id && item.quantity > 1) {
-                return {
-                  ...item,
-                  quantity: item.quantity - 1,
-                };
-              }
-              return item;
-            }),
-          };
-        }),
+        set((state) => ({
+          cart: state.cart.map((item) =>
+            item.id === id && item.quantity > 1
+              ? { ...item, quantity: item.quantity - 1 }
+              : item,
+          ),
+        })),
 
       // remove product
       removeProduct: (id: number) =>

@@ -14,12 +14,18 @@ const useWishlistStore = create<WishlistState>()(
     (set, get) => ({
       wishlist: [],
 
-      addToWishlist: (product) => {
-        if (!product?.id) return;
-        set((state) => ({
-          wishlist: [...state.wishlist, product],
-        }));
-      },
+      addToWishlist: (product) =>
+        set((state) => {
+          const exists = state.wishlist.some((item) => item.id === product.id);
+
+          if (exists) {
+            return state;
+          }
+
+          return {
+            wishlist: [...state.wishlist, product],
+          };
+        }),
 
       removeFromWishlist: (id) =>
         set((state) => ({

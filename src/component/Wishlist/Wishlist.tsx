@@ -1,15 +1,23 @@
 import useCartStore from "../../store/useCartStore";
 import useWishlistStore from "../../store/useWishlistStore";
 import { MdDelete } from "react-icons/md";
+import type { Product } from "../../types/product";
 
 const Wishlist = () => {
-  const Wishlist = useWishlistStore((state) => state.wishlist);
-  console.log("Wishlist data:", Wishlist);
-  
-  const validWishlist = Wishlist?.filter((item) => item && item.id) ?? [];
+  const wishlist = useWishlistStore((state) => state.wishlist);
+  console.log("wishlist data",wishlist)
+  // const validWishlist = Wishlist?.filter((item) => item && item.id) ?? [];
 
-  const AddtoCart = useCartStore((state) => state.addToCart);
-  const removeWish = useWishlistStore((state) => state.removeFromWishlist);
+  const HandleAddtoCart = (item: Product) => {
+    addToCart(item);
+    removeFromWishlist(item.id);
+  };
+  
+  const addToCart = useWishlistStore((state) => state.addToWishlist);
+
+  const removeFromWishlist = useWishlistStore(
+    (state) => state.removeFromWishlist,
+  );
 
   return (
     <>
@@ -19,7 +27,7 @@ const Wishlist = () => {
           Wishlist
         </h1>
         {/* Product */}
-        {validWishlist?.map((item) => (
+        {wishlist.map((item) => (
           <div
             className="grid grid-cols-2 sm:grid-cols-4 items-center border-b border-gray-200"
             key={item.id}
@@ -27,7 +35,7 @@ const Wishlist = () => {
             <div className="flex sm:items-center gap-5">
               {/* remove button */}
               <MdDelete
-                onClick={() => removeWish(item.id)}
+                onClick={() => removeFromWishlist(item.id)}
                 className="text-xl text-gray-500 cursor-pointer"
               />
 
@@ -58,7 +66,7 @@ const Wishlist = () => {
             {/*Add to cart  */}
             <div className="flex justify-center">
               <button
-                onClick={() => AddtoCart(item)}
+                onClick={() => HandleAddtoCart(item)}
                 className="px-2 py-1 rounded-xl bg-purple-200 hover:bg-purple-400 cursor-pointer select-none"
               >
                 Move to Cart
@@ -75,7 +83,7 @@ const Wishlist = () => {
         </h1>
         <div className="grid-cols-2 grid gap-3 p-3">
           {/* Product */}
-          {Wishlist?.map((item) => (
+          {wishlist?.map((item) => (
             <div
               className="flex flex-col justify-between border border-gray-200 rounded-sm bg-white shadow-sm shadow-purple-300 items-center p-3 "
               key={item.id}
@@ -94,7 +102,7 @@ const Wishlist = () => {
 
                 {/* remove button */}
                 <MdDelete
-                  onClick={() => removeWish(item.id)}
+                  onClick={() => removeFromWishlist(item.id)}
                   className="text-xl absolute top-2 right-2 text-gray-500 cursor-pointer"
                 />
               </div>
@@ -114,7 +122,7 @@ const Wishlist = () => {
               {/*Add to cart  */}
               <div className="flex justify-center mt-4">
                 <button
-                  onClick={() => AddtoCart(item)}
+                  onClick={() => addToCart(item)}
                   className="px-2 py-1 rounded-sm bg-purple-200 hover:bg-purple-400 cursor-pointer select-none"
                 >
                   Move to Cart
