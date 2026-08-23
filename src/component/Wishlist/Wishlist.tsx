@@ -5,14 +5,14 @@ import type { Product } from "../../types/product";
 
 const Wishlist = () => {
   const wishlist = useWishlistStore((state) => state.wishlist);
-  console.log("wishlist data",wishlist)
-  // const validWishlist = Wishlist?.filter((item) => item && item.id) ?? [];
+  console.log("wishlist data", wishlist);
+  // const validWishlist = wishlist?.filter((item) => item && item.id) ?? [];
 
   const HandleAddtoCart = (item: Product) => {
     addToCart(item);
     removeFromWishlist(item.id);
   };
-  
+
   const addToCart = useWishlistStore((state) => state.addToWishlist);
 
   const removeFromWishlist = useWishlistStore(

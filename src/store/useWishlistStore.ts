@@ -16,6 +16,10 @@ const useWishlistStore = create<WishlistState>()(
 
       addToWishlist: (product) =>
         set((state) => {
+          
+          // Guard against null/undefined product or missing id
+          if (!product?.id) return state;
+
           const exists = state.wishlist.some((item) => item.id === product.id);
 
           if (exists) {
