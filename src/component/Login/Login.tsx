@@ -1,20 +1,20 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
-import { authService } from "../../services/authService";
+import { useLogin } from "../../hooks/useLogin";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const { mutate, isPending, isError, error } = useLogin();
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      const result = await authService.login({ username, password });
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    }
+    mutate({
+      username,
+      password,
+    });
   };
 
   return (
@@ -34,7 +34,15 @@ const Login = () => {
           placeholder="Password"
         />
 
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isPending}>
+          {isPending ? "Logging in..." : "Login"}
+        </button>
+
+        {isError && (
+          <p className="text-red-500">
+            {error instanceof Error ? error.message : "Login failed"}
+          </p>
+        )}
       </form>
     </main>
   );
