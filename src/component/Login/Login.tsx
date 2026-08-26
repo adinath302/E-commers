@@ -11,7 +11,7 @@ const Login = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    mutate({
+    mutate({ 
       username,
       password,
     });
