@@ -8,7 +8,10 @@ export const authService = {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify(credentials),
+      body: JSON.stringify({
+        username: credentials.username,
+        password: credentials.password,
+      }),
     });
 
     if (!response.ok) {
@@ -19,10 +22,14 @@ export const authService = {
   },
 
   getCurrentUser: async (token: string) => {
+    if (!token) {
+      return null;
+    }
+
     const response = await fetch("https://dummyjson.com/auth/me", {
       method: "GET",
       headers: {
-        Authorization: "Bearer ${token}",
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -31,5 +38,10 @@ export const authService = {
     }
 
     return response.json();
+  },
+
+  logout: () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
   },
 };

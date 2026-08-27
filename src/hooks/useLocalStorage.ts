@@ -1,18 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 
-export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
-  const [value, setValue] = useState(() => {
+export function useLocalStorage<T>(
+  key: string,
+  initialValue: T | (() => T),
+): [T, Dispatch<SetStateAction<T>>] {
+  // 1. Initialize state
+  const [value, setValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
-      // parse stored json or return the initialValue if nothing is stored
-      return item ? JSON.parse(item) : initialValue;
+      if (item !== null) {
+        return JSON.parse(item);
+      }
+
+      // Handle functional initial value correctly
+      return typeof initialValue === "function"
+        ? (initialValue as () => T)()
+        : initialValue;
     } catch (error) {
       console.warn(`Error reading localStorage "${key}":`, error);
-      return initialValue;
+      return typeof initialValue === "function"
+        ? (initialValue as () => T)()
+        : initialValue;
     }
   });
 
-  // Update localStorage whenever the state changes
+  // 2. Synchronize with localStorage on change
   useEffect(() => {
     try {
       window.localStorage.setItem(key, JSON.stringify(value));
@@ -20,5 +32,6 @@ export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
       console.warn(`Error setting localStorage key "${key}":`, error);
     }
   }, [key, value]);
+
   return [value, setValue];
-};
+}

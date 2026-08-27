@@ -12,6 +12,7 @@ interface CartState {
   decreaseQuantity: (id: number) => void;
   removeProduct: (id: number) => void;
 }
+
 const useCartStore = create<CartState>()(
   persist(
     // with persist the cart will be saved in the local storage

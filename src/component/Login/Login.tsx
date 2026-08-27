@@ -6,12 +6,16 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { mutate, isPending, isError, error } = useLogin();
+  const { mutate, isPending, isError, error, data } = useLogin();
+  console.log(data);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    mutate({ 
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("refreshToken", data.refreshToken);
+
+    mutate({
       username,
       password,
     });
