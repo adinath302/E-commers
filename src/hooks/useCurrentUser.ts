@@ -11,7 +11,7 @@ export const useCurrentUser = () => {
 
     queryFn: () => authService.getCurrentUser(accessToken!),
 
-    enabled:Boolean(accessToken),
+    enabled:Boolean(),
 
     staleTime: 1000 * 60 * 5,
 

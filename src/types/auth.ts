@@ -11,6 +11,16 @@ export interface User {
 
 export interface AuthResponse {
   user: User;
-  // We'll add the actual session/token shape
-  // once your backend/API contract is defined.
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface CurrentUser {
+  id: number;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  image: string;
 }

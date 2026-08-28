@@ -1,7 +1,7 @@
-import type { LoginCredentials } from "../types/auth";
+import type { AuthResponse, LoginCredentials } from "../types/auth";
 
 export const authService = {
-  login: async (credentials: LoginCredentials) => {
+  login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
     const response = await fetch("https://dummyjson.com/auth/login", {
       method: "POST",
       headers: {
@@ -23,6 +23,7 @@ export const authService = {
 
   getCurrentUser: async (token: string) => {
     console.log("token from authService", token);
+
     if (!token) {
       return null;
     }

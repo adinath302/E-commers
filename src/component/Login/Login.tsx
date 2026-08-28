@@ -26,6 +26,7 @@ const Login = () => {
           value={username}
           onChange={(event) => setUsername(event.target.value)}
           placeholder="Username"
+          autoComplete="username"
         />
 
         <input
@@ -33,6 +34,7 @@ const Login = () => {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           placeholder="Password"
+          autoComplete="current-password"
         />
 
         <button type="submit" disabled={isPending}>
