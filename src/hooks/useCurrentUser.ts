@@ -1,16 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { authService } from "../services/authService";
+import useAuthStore from "../store/useAuthStore";
 
 export const useCurrentUser = () => {
-  const token = localStorage.getItem("accessToken");
-  console.log("token from localstorage in useCurrentUserb", token);
+  const accessToken = useAuthStore((state) => state.accessToken);
+  console.log("token from localstorage in useCurrentUserb", accessToken);
 
   return useQuery({
-    queryKey: ["current-user", token],
-    queryFn: () => authService.getCurrentUser(token!),
-    enabled: !!token,
+    queryKey: ["current-user", accessToken],
+
+    queryFn: () => authService.getCurrentUser(accessToken!),
+
+    enabled:Boolean(accessToken),
 
     staleTime: 1000 * 60 * 5,
+
     retry: false,
   });
 };

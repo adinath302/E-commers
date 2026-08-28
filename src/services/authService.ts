@@ -22,6 +22,7 @@ export const authService = {
   },
 
   getCurrentUser: async (token: string) => {
+    console.log("token from authService", token);
     if (!token) {
       return null;
     }
@@ -38,10 +39,5 @@ export const authService = {
     }
 
     return response.json();
-  },
-
-  logout: () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
   },
 };
