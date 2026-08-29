@@ -1,4 +1,8 @@
-import type { AuthResponse, LoginCredentials } from "../types/auth";
+import type {
+  AuthResponse,
+  CurrentUser,
+  LoginCredentials,
+} from "../types/auth";
 
 export const authService = {
   login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
@@ -21,8 +25,8 @@ export const authService = {
     return response.json();
   },
 
-  getCurrentUser: async (token: string) => {
-    console.log("token from authService", token);
+  getCurrentUser: async (token: string | null): Promise<CurrentUser | null> => {
+    // console.log("token from authService", token);
 
     if (!token) {
       return null;

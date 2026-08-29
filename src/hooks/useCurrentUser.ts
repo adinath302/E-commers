@@ -4,14 +4,14 @@ import useAuthStore from "../store/useAuthStore";
 
 export const useCurrentUser = () => {
   const accessToken = useAuthStore((state) => state.accessToken);
-  console.log("token from localstorage in useCurrentUserb", accessToken);
+  // console.log("token from localstorage in useCurrentUserb", accessToken);
 
   return useQuery({
     queryKey: ["current-user", accessToken],
 
     queryFn: () => authService.getCurrentUser(accessToken!),
 
-    enabled:Boolean(),
+    enabled:Boolean(accessToken), // it tells when to execute the query 
 
     staleTime: 1000 * 60 * 5,
 
