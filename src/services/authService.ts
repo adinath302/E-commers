@@ -31,7 +31,7 @@ export const authService = {
     if (!token) {
       return null;
     }
-
+    
     const response = await fetch("https://dummyjson.com/auth/me", {
       method: "GET",
       headers: {
