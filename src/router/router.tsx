@@ -8,6 +8,7 @@ import ErrorPage from "../pages/ErrorPage";
 import ProductDetails from "../component/Products/ProductDetails";
 import Wishlist from "../component/Wishlist/Wishlist";
 import CartDetails from "../component/Cart/CartDetails.tsx";
+import ProtectedRoute from "../pages/ProtectedRoute.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,25 @@ export const router = createBrowserRouter([
       {
         path: "wishlist",
         element: <Wishlist />,
+      },
+
+      // Protected routes
+      {
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "checkout",
+            // element: <Checkout />,
+          },
+          {
+            path: "orders",
+            // element: <Orders />,
+          },
+          {
+            path: "profile",
+            // element: <Profile />,
+          },
+        ],
       },
     ],
   },
