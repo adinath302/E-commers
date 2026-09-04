@@ -9,6 +9,7 @@ import ProductDetails from "../component/Products/ProductDetails";
 import Wishlist from "../component/Wishlist/Wishlist";
 import CartDetails from "../component/Cart/CartDetails.tsx";
 import ProtectedRoute from "../pages/ProtectedRoute.tsx";
+import Checkout from "../component/Checkout/Checkout.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -51,7 +52,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "checkout",
-            // element: <Checkout />,
+            element: <Checkout />,
           },
           {
             path: "orders",

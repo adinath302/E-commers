@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useCartStore from "../../store/useCartStore";
 import {
   calculateSubTotal,
@@ -45,9 +46,13 @@ const CartSummary = () => {
           </div>
 
           {/* Checkout Button */}
-          <button className="mt-6 w-full text-white bg-gray-900 hover:bg-black focus:ring-4 focus:outline-none focus:ring-gray-300 font-semibold rounded-xl text-sm sm:text-base px-5 py-3 transition-colors duration-200 text-center">
-            Proceed to Checkout
-          </button>
+          <Link to={'/checkout'}>
+            <button
+              className="mt-6 w-full text-white bg-gray-900 hover:bg-black focus:ring-4 focus:outline-none focus:ring-gray-300 font-semibold rounded-xl text-sm sm:text-base px-5 py-3 transition-colors duration-200 text-center"
+            >
+              Proceed to Checkout
+            </button>
+          </Link>
         </section>
       )}
     </>
