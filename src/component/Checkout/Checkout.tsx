@@ -2,6 +2,7 @@ import { useState } from "react";
 import useCartStore from "../../store/useCartStore";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { Link } from "react-router-dom";
+import type { Order } from "../../types/orders";
 
 const Checkout = () => {
   const { data: user, isLoading } = useCurrentUser();
@@ -56,14 +57,34 @@ const Checkout = () => {
       return;
     }
 
-    console.log("Order ready to be placed:", {
-      user,
-      cart,
-      address,
+    if (!user) {
+      alert("Please login before placing an order");
+      return;
+    }
+
+    const order: Order = {
+      id: crypto.randomUUID(),
+      userId: user.id,
+
+      items: cart.map((item) => ({
+        productId: item.id,
+        title: item.title,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+
+      shippingAddress: address,
+
       subtotal,
       shippingCost,
       total,
-    });
+
+      status: "pending",
+
+      createdAt: new Date().toISOString(),
+    };
+
+    console.log("Order created:", order);
   };
 
   return (
@@ -89,7 +110,9 @@ const Checkout = () => {
               </div>
             ) : (
               <Link to={"/login"}>
-                <button className="px-2 py-1 bg-purple-300 rounded-xl">Login</button>
+                <button className="px-2 py-1 bg-purple-300 rounded-xl">
+                  Login
+                </button>
               </Link>
             )}
           </div>
