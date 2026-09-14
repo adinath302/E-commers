@@ -26,3 +26,12 @@ export interface Order {
   status: "pending" | "confirmed" | "cancelled";
   createdAt: string;
 }
+
+export interface CreateOrderInput {
+  userId: number;
+  items: OrderItem[];
+  shippingAddress: ShippingAddress;
+  subtotal: number;
+  shippingCost: number;
+  total: number;
+}
