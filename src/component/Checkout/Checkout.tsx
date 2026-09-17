@@ -3,11 +3,14 @@ import useCartStore from "../../store/useCartStore";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { Link } from "react-router-dom";
 import type { Order } from "../../types/orders";
+import { useCreateOrder } from "../../hooks/useCreateOrder";
 
 const Checkout = () => {
   const { data: user, isLoading } = useCurrentUser();
 
   const cart = useCartStore((state) => state.cart);
+  
+  const createOrderMutation = useCreateOrder()
 
   const [address, setAddress] = useState({
     firstName: "",
@@ -31,6 +34,7 @@ const Checkout = () => {
   const shippingCost = 2.35;
 
   const total = subtotal + shippingCost;
+
 
   const handlePlaceOrder = () => {
     if (cart.length === 0) {
