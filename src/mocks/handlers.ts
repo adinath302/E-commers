@@ -1,10 +1,12 @@
 import { http, HttpResponse } from "msw";
 import type { CreateOrderInput, Order } from "../types/orders";
 import { orders } from "./data/orders";
-
+// msw handler
 export const handlers = [
   http.post("/api/orders", async ({ request }) => {
     const body = (await request.json()) as CreateOrderInput;
+
+    console.log("MSW received order", body);
 
     const newOrder: Order = {
       id: crypto.randomUUID(),
@@ -19,6 +21,8 @@ export const handlers = [
     };
 
     orders.push(newOrder);
+
+    console.log("Mock database", orders);
 
     return HttpResponse.json(newOrder, {
       status: 201,

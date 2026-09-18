@@ -83,7 +83,6 @@ const Checkout = () => {
     };
 
     createOrderMutation.mutate(orderData);
-    
   };
 
   return (
