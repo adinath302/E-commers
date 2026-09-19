@@ -33,7 +33,7 @@ const Checkout = () => {
 
   const shippingCost = 2.35;
 
-  const total = subtotal + shippingCost;
+  const total = Math.round((subtotal + shippingCost) * 100) / 100;
 
   const handlePlaceOrder = () => {
     if (cart.length === 0) {

@@ -10,6 +10,7 @@ import Wishlist from "../component/Wishlist/Wishlist";
 import CartDetails from "../component/Cart/CartDetails.tsx";
 import ProtectedRoute from "../pages/ProtectedRoute.tsx";
 import Checkout from "../component/Checkout/Checkout.tsx";
+import Orders from "../component/Orders/Orders.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -56,7 +57,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "orders",
-            // element: <Orders />,
+             element: <Orders />,
           },
           {
             path: "profile",

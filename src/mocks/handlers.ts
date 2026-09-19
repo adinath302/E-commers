@@ -28,4 +28,16 @@ export const handlers = [
       status: 201,
     });
   }),
+
+  http.get("/api/orders",({request})=>{
+    const url = new URL(request.url)
+    const userId = Number(url.searchParams.get("userId"))
+
+    const userOrders = orders.filter(
+      (order)=>order.userId===userId
+    );
+    
+    return HttpResponse.json(userOrders)
+  })
+
 ];
