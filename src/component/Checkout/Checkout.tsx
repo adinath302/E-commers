@@ -1,11 +1,13 @@
 import { useState } from "react";
 import useCartStore from "../../store/useCartStore";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { CreateOrderInput } from "../../types/orders";
 import { useCreateOrder } from "../../hooks/useCreateOrder";
 
 const Checkout = () => {
+  const navigate = useNavigate();
+
   const { data: user, isLoading } = useCurrentUser();
 
   const cart = useCartStore((state) => state.cart);
@@ -82,7 +84,11 @@ const Checkout = () => {
       total,
     };
 
-    createOrderMutation.mutate(orderData);
+    createOrderMutation.mutate(orderData, {
+      onSuccess: () => {
+        navigate("/orders");
+      },
+    });
   };
 
   return (
@@ -256,10 +262,13 @@ const Checkout = () => {
 
           <button
             onClick={handlePlaceOrder}
+            disabled={createOrderMutation.isPending}
             type="button"
             className="w-full mt-6 bg-black text-white py-3 rounded-lg"
           >
-            Place Order
+            {createOrderMutation.isPending
+              ? "Placing Order..."
+              : " Place Order"}
           </button>
         </aside>
       </div>

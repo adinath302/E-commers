@@ -23,6 +23,7 @@ export const handlers = [
     orders.push(newOrder);
 
     console.log("Mock database", orders);
+    console.log("Mock database", orders);
 
     return HttpResponse.json(newOrder, {
       status: 201,

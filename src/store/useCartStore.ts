@@ -77,6 +77,12 @@ const useCartStore = create<CartState>()(
           cart: state.cart.filter((item) => item.id !== id),
         })),
 
+      clearCart: () => {
+        set((state) => ({
+          state.cart === null;
+        }));
+      },
+
       // total cart quantitgy
     }), // 4. FIXED: Properly closed the store configuration function
     {
