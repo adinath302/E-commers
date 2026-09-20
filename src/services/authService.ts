@@ -6,6 +6,7 @@ import type {
 
 export const authService = {
   login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
+    
     const response = await fetch("https://dummyjson.com/auth/login", {
       method: "POST",
       headers: {
