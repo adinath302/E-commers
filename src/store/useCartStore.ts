@@ -11,6 +11,7 @@ interface CartState {
   increaseQuantity: (id: number) => void;
   decreaseQuantity: (id: number) => void;
   removeProduct: (id: number) => void;
+  clearCart: () => void;
 }
 
 const useCartStore = create<CartState>()(
@@ -77,11 +78,8 @@ const useCartStore = create<CartState>()(
           cart: state.cart.filter((item) => item.id !== id),
         })),
 
-      clearCart: () => {
-        set((state) => ({
-          state.cart === null;
-        }));
-      },
+      // clear cart
+      clearCart: () => set({ cart: [] }),
 
       // total cart quantitgy
     }), // 4. FIXED: Properly closed the store configuration function

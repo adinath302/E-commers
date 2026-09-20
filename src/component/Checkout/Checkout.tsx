@@ -11,6 +11,7 @@ const Checkout = () => {
   const { data: user, isLoading } = useCurrentUser();
 
   const cart = useCartStore((state) => state.cart);
+  const clearCart = useCartStore((state) => state.clearCart);
 
   const createOrderMutation = useCreateOrder();
 
@@ -86,6 +87,7 @@ const Checkout = () => {
 
     createOrderMutation.mutate(orderData, {
       onSuccess: () => {
+        clearCart();
         navigate("/orders");
       },
     });
