@@ -26,4 +26,15 @@ export const orderService = {
 
     return response.json();
   },
+
+  getOrderById: async (orderId: string): Promise<Order> => {
+    const response = await fetch(`/api/orders/${orderId}`);
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error("Order not found");
+      }
+      throw new Error("Failed to fetch order");
+    }
+    return response.json();
+  },
 };

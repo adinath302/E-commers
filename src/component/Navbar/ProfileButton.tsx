@@ -1,13 +1,14 @@
 import React from "react";
 import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 const ProfileButton = () => {
   return (
     <div>
       {" "}
-      <div className="cursor-pointer">
+      <Link to={"/profile"} className="cursor-pointer">
         <CgProfile />
-      </div>
+      </Link>
     </div>
   );
 };

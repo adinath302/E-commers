@@ -1,13 +1,15 @@
 import { useState } from "react";
 import useCartStore from "../../store/useCartStore";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import type { CreateOrderInput } from "../../types/orders";
 import { useCreateOrder } from "../../hooks/useCreateOrder";
+import useAuthStore from "../../store/useAuthStore";
 
 const Checkout = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const Logout = useAuthStore((state) => state.logout);
   const { data: user, isLoading } = useCurrentUser();
 
   const cart = useCartStore((state) => state.cart);
@@ -93,6 +95,10 @@ const Checkout = () => {
     });
   };
 
+  const HanldeLogout = () => {
+    Logout();
+  };
+
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Checkout</h1>
@@ -101,7 +107,7 @@ const Checkout = () => {
         {/* Checkout Form */}
         <section className="lg:col-span-2 space-y-8">
           {/* User Information */}
-          <div className="border rounded-xl p-6">
+          <div className="border rounded-xl p-6 flex flex-col relative">
             <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
 
             {user ? (
@@ -113,9 +119,17 @@ const Checkout = () => {
                 <p>
                   <strong>Email:</strong> {user.email}
                 </p>
+                <Link
+                  to={"/login"}
+                  state={{ from: location.pathname }}
+                  onClick={HanldeLogout}
+                  className="absolute top-2 right-3 px-2 py-1 bg-red-300 rounded-xl cursor-pointer select-none"
+                >
+                  Logout
+                </Link>
               </div>
             ) : (
-              <Link to={"/login"}>
+              <Link to={"/login"} state={{ from: location.pathname }}>
                 <button className="px-2 py-1 bg-purple-300 rounded-xl">
                   Login
                 </button>

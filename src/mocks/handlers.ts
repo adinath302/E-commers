@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 import type { CreateOrderInput, Order } from "../types/orders";
-import { orders } from "./data/orders";
+import { orders, saveOrders } from "./data/orders";
 // msw handler
 export const handlers = [
   http.post("/api/orders", async ({ request }) => {
@@ -21,6 +21,7 @@ export const handlers = [
     };
 
     orders.push(newOrder);
+    saveOrders();
 
     console.log("Mock database", orders);
     console.log("Mock database", orders);
@@ -30,15 +31,31 @@ export const handlers = [
     });
   }),
 
-  http.get("/api/orders",({request})=>{
-    const url = new URL(request.url)
-    const userId = Number(url.searchParams.get("userId"))
+  http.get("/api/orders", ({ request }) => {
+    const url = new URL(request.url);
+    const userId = Number(url.searchParams.get("userId"));
 
-    const userOrders = orders.filter(
-      (order)=>order.userId===userId
-    );
-    
-    return HttpResponse.json(userOrders)
-  })
+    const userOrders = orders.filter((order) => order.userId === userId);
 
+    return HttpResponse.json(userOrders);
+  }),
+
+  // order details
+  http.get("/api/orders/:orderId", ({ params }) => {
+    const orderId = String(params.orderId);
+
+    const order = orders.find((order) => order.id === orderId);
+
+    if (!order) {
+      return HttpResponse.json(
+        {
+          message: "Order not found",
+        },
+        {
+          status: 404,
+        },
+      );
+    }
+    return HttpResponse.json(order);
+  }),
 ];
