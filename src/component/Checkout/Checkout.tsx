@@ -95,10 +95,6 @@ const Checkout = () => {
     });
   };
 
-  const HanldeLogout = () => {
-    Logout();
-  };
-
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Checkout</h1>
@@ -119,14 +115,18 @@ const Checkout = () => {
                 <p>
                   <strong>Email:</strong> {user.email}
                 </p>
-                <Link
-                  to={"/login"}
-                  state={{ from: location.pathname }}
-                  onClick={HanldeLogout}
+                <button
+                  type="button"
+                  onClick={() => {
+                    Logout();
+                    navigate("/login", {
+                      state: { from: location.pathname },
+                    });
+                  }}
                   className="absolute top-2 right-3 px-2 py-1 bg-red-300 rounded-xl cursor-pointer select-none"
                 >
                   Logout
-                </Link>
+                </button>
               </div>
             ) : (
               <Link to={"/login"} state={{ from: location.pathname }}>
